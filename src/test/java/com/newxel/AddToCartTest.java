@@ -5,6 +5,7 @@ import com.newxel.pageObject.CartPage;
 import com.newxel.pageObject.HomePage;
 import io.qameta.allure.Description;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 public class AddToCartTest extends SeleniumSetup {
     HomePage homePage = new HomePage();
@@ -14,19 +15,23 @@ public class AddToCartTest extends SeleniumSetup {
     @Test
     @Description("Add two items to the cart and check calculation correctness")
     public void addItemsToCart() {
-        homePage.openPage(homePage.getBaseUrl());
-        homePage.clickOnItem("Samsung galaxy s7");
-        itemDetailPage.asserts.assertDetailPageLoaded("Samsung galaxy s7");
-        itemDetailPage.addCurrentItemToCart();
+        SoftAssert softAssert = new SoftAssert();
 
-        homePage.openPage(homePage.getBaseUrl());
-        homePage.clickOnItem("Samsung galaxy s6");
-        itemDetailPage.asserts.assertDetailPageLoaded("Samsung galaxy s6");
-        itemDetailPage.addCurrentItemToCart();
+        addItemToCart("Samsung galaxy s7");
+        addItemToCart("Samsung galaxy s6");
 
         cartPage.openPage(cartPage.pageUrl());
-        cartPage.asserts.assertItemExistsInCart("Samsung galaxy s7", "800");
-        cartPage.asserts.assertItemExistsInCart("Samsung galaxy s6", "360");
-        cartPage.asserts.assertTotalAmount("1160");
+
+        softAssert.assertEquals(cartPage.getItemPrice("Samsung galaxy s7"), "800");
+        softAssert.assertEquals(cartPage.getItemPrice("Samsung galaxy s6"), "360");
+        softAssert.assertEquals(cartPage.getTotalAmount(), "1160");
+        softAssert.assertAll();
+    }
+
+    private void addItemToCart(String itemName) {
+        homePage.openPage(homePage.getBaseUrl());
+        homePage.clickOnItem(itemName);
+        itemDetailPage.asserts.assertDetailPageLoaded(itemName);
+        itemDetailPage.addCurrentItemToCart();
     }
 }
