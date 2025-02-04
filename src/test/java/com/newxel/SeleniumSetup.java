@@ -12,7 +12,8 @@ public class SeleniumSetup {
     public void setUp() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
                 .screenshots(true)
-                .savePageSource(true));
+                .savePageSource(true)
+                .includeSelenideSteps(true));
         System.setProperty("selenide.baseUrl", "https://www.demoblaze.com/");
         Configuration.browserSize = "1920x1080";
         Configuration.screenshots = true;

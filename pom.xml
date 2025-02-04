@@ -1,5 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.newxel</groupId>
   <artifactId>newxel-task</artifactId>
@@ -9,40 +10,50 @@
   <url>http://maven.apache.org</url>
 
   <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <allure.version>2.29.0</allure.version>
+    <testng.version>7.10.0</testng.version>
+    <selenide.version>7.7.0</selenide.version>
+    <restassured.version>5.3.0</restassured.version>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
-      <version>7.10.0</version>
+      <version>${testng.version}</version>
     </dependency>
 
     <dependency>
       <groupId>com.codeborne</groupId>
       <artifactId>selenide</artifactId>
-      <version>7.7.0</version>
+      <version>${selenide.version}</version>
     </dependency>
 
     <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>rest-assured</artifactId>
-      <version>5.3.0</version>
+      <version>${restassured.version}</version>
     </dependency>
 
     <dependency>
       <groupId>io.qameta.allure</groupId>
       <artifactId>allure-testng</artifactId>
-      <version>2.29.1</version>
+      <version>${allure.version}</version>
     </dependency>
 
     <dependency>
       <groupId>io.qameta.allure</groupId>
       <artifactId>allure-selenide</artifactId>
-      <version>2.29.1</version>
+      <version>${allure.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjweaver</artifactId>
+      <version>1.9.7</version>
     </dependency>
 
   </dependencies>
@@ -54,17 +65,10 @@
       <plugin>
         <groupId>io.qameta.allure</groupId>
         <artifactId>allure-maven</artifactId>
-        <version>2.15.2</version>
+        <version>2.12.0</version>
         <configuration>
           <reportVersion>2.30.0</reportVersion>
         </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>report</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
 
       <plugin>
@@ -76,7 +80,7 @@
             <path>
               <groupId>io.qameta.allure</groupId>
               <artifactId>allure-java-commons</artifactId>
-              <version>2.29.1</version>
+              <version>${allure.version}</version>
             </path>
           </annotationProcessorPaths>
         </configuration>
@@ -85,7 +89,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.1.2</version>
+        <version>3.5.2</version>
         <configuration>
 
           <systemPropertyVariables>
@@ -94,6 +98,7 @@
           <suiteXmlFiles>
             <suiteXmlFile>testng.xml</suiteXmlFile>
           </suiteXmlFiles>
+          <argLine>-javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/1.9.7/aspectjweaver-1.9.7.jar</argLine>
 
         </configuration>
 
