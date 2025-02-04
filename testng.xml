@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Front-end">
+    <listeners>
+        <listener class-name="io.qameta.allure.testng.AllureTestNg" />
+    </listeners>
+
+    <test name="Nexwel task tests">
+        <classes>
+            <class name="com.newxel.AddToCartTest"/>
+        </classes>
+    </test>
+
+</suite>
