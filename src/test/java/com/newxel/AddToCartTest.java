@@ -7,7 +7,7 @@ import io.qameta.allure.Description;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class AddToCartTest extends SeleniumSetup {
+public class AddToCartTest extends SelenideSetup {
     HomePage homePage = new HomePage();
     AddToCartPage itemDetailPage = new AddToCartPage();
     CartPage cartPage = new CartPage();

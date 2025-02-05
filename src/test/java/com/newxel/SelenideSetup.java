@@ -6,7 +6,7 @@ import io.qameta.allure.selenide.AllureSelenide;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
-public class SeleniumSetup {
+public class SelenideSetup {
 
     @BeforeClass
     public void setUp() {
